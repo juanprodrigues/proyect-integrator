@@ -19,8 +19,13 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('inicio/', views.inicio, name='inicio'),
+    path('', views.inicio, name='inicio'),
     path('acerca_de/', views.acerca_de, name='acerca_de'),
     path('contacto/', views.contacto, name='contacto'),
+     # ruta para manejar la búsqueda
+    path('buscar/', views.buscar_productos, name='buscar'),
+    path('crear_producto/', views.crear_producto, name='crear_producto'),
+    path('enviar_email/', views.email_enviado, name='enviar_email'),
+
 
 ]

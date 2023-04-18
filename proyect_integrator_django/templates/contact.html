@@ -1,2 +1,31 @@
+
 {% include 'navbar.html' %}
-Page of contact
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8">
+        <h2 class="text-center mb-4">Contáctanos</h2>
+        <form action="{% url 'enviar_email' %}" method="post">
+          {% csrf_token %}
+          <div class="form-group mb-4">
+            <label for="nombre">Nombre completo</label>
+            <input type="text" name="nombre" id="nombre" class="form-control" required>
+          </div>
+          <div class="form-group mb-4">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" class="form-control" required>
+          </div>
+          <div class="form-group mb-4">
+            <label for="telefono">Teléfono</label>
+            <input type="tel" name="telefono" id="telefono" class="form-control" required>
+          </div>
+          <div class="form-group mb-4">
+            <label for="mensaje">Mensaje</label>
+            <textarea name="mensaje" id="mensaje" class="form-control" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  
