@@ -1,21 +1,9 @@
-from django.shortcuts import render 
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-
+from .forms import Contacto
+from django.contrib import messages
 from . import models
 
-
-
-# from django.contrib.auth.models import User
-
-# Create user and save to the database
-
-# user = User.objects.create_user('myusername', 'myemail@crazymail.com', 'mypassword')
-
-# Update fields and then save again
-
-# user.first_name = 'John'
-# user.last_name = 'Citizen'
-# user.save()
 
 def inicio(request):
     producto = models.Producto(nombre='A1', descripcion='Esta es una descripción de ejemplo.', precio=9.99)
@@ -26,8 +14,30 @@ def inicio(request):
 def acerca_de(request):
     return render(request, 'about.html')
 
+
 def contacto(request):
-    return render(request, 'contact.html')
+    if request.method == "POST":
+        contacto_form = Contacto(request.POST)
+        print("Este formulario esta OK?: ",contacto_form.is_valid())
+
+        if contacto_form.is_valid():
+            print("validando correo")
+            print(contacto_form.cleaned_data['mail'])
+            return render(request,'email_enviado.html')
+    else:
+        # GET
+        print("contacto_form.is_valid()")
+        contacto_form = Contacto()
+    
+    context = {
+        'form': contacto_form
+    }
+
+    return render(request, 'contact.html', context)
+
+
+# def contacto(request):
+#     return render(request, 'contact.html')
 
 def buscar_productos(request):
     query = request.GET.get('q')
